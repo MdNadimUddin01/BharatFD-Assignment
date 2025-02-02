@@ -1,23 +1,15 @@
 import React from "react";
 // import {} from "@mui/materia"
-function Textfield() {
+function Textfield({question, setQuestion}) {
   return (
-    <div>
-      <div className="space-y-2">
-      <label 
-        htmlFor="faqWuestion" 
-        className="text-sm font-medium text-gray-700 flex flex-start px-2"
-      >
-        Qyestion
-      </label>
-
+    <div className="w-full">
       <textarea
-        id="faqWuestion"
-        className="w-full min-h-[100px] rounded-lg border border-gray-200 p-3 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-y"
+        id="faqQuestion"
+        className="w-full min-h-[150px] rounded-lg border border-gray-200 p-4 text-base placeholder:text-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-y bg-white shadow-sm"
         placeholder="Enter FAQ Question"
+        value={question}
+        onChange={(e) => setQuestion(e.target.value)}
       />
-    </div>
-
     </div>
   );
 }

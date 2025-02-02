@@ -1,17 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Editor from './component/Editor'
-import Textfield from './component/TextField'
-import AddFaq from './pages/AddFaq'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './component/ProtectedRoute';
+import AddFaq from './pages/AddFaq';
+import AdminLogin from './pages/AdminLogin';
+
 function App() {
   return (
-    <>
-    {/* <Editor></Editor> */}
-    <AddFaq></AddFaq>
-    </>
-  )
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route 
+            path="/admin-dashboard" 
+            element={
+              <ProtectedRoute>
+                <AddFaq />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/" element={<AddFaq />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

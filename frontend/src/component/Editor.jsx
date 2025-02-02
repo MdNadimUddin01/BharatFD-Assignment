@@ -1,12 +1,10 @@
 import React from "react";
-import "./Editor.css";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { CKEditor, useCKEditorCloud } from "@ckeditor/ckeditor5-react";
-import { Edit } from "lucide-react";
 
 const LICENSE_KEY = import.meta.env.VITE_LICENSE_KEY;
 
-function Editor() {
+function Editor({answer , setAnswer}) {
   const editorContainerRef = useRef(null);
   const editorRef = useRef(null);
   const editorWordCountRef = useRef(null);
@@ -81,7 +79,7 @@ function Editor() {
             "outdent",
             "indent",
           ],
-          shouldNotGroupWhenFull: false,
+          shouldNotGroupWhenFull: true,
         },
         plugins: [
           Autosave,
@@ -180,7 +178,6 @@ function Editor() {
             },
           ],
         },
-        initialData: `<p>Enter your answer</p>`,
         licenseKey: LICENSE_KEY,
         link: {
           addTargetToExternalLinks: true,
@@ -210,41 +207,33 @@ function Editor() {
   }, [cloud, isLayoutReady]);
 
   return (
-    <div className="main-container conainer">
-      <div
-        className="editor-container editor-container_classic-editor editor-container_include-block-toolbar editor-container_include-word-count"
-        ref={editorContainerRef}
-      >
-        <div className="editor-container__editor">
-          <div ref={editorRef}>
-            {ClassicEditor && editorConfig && (
-              <CKEditor
-                onChange={(EventInfo , Editor) => {
-                  console.log("EventInfoName : ", EventInfo.name);
-                  console.log("Data : " , Editor.getData());
-                }}
-                onReady={(editor) => {
-                  const wordCount = editor.plugins.get("WordCount");
-                  editorWordCountRef.current.appendChild(
-                    wordCount.wordCountContainer
-                  );
-                }}
-                onAfterDestroy={() => {
-                  Array.from(editorWordCountRef.current.children).forEach(
-                    (child) => child.remove()
-                  );
-                }}
-                editor={ClassicEditor}
-                config={editorConfig}
-              />
-            )}
-          </div>
+    <div className="w-full my-auto">
+      <div className="[&_.ck.ck-editor]:max-w-full [&_.ck.ck-editor__main>.ck-editor__editable]:min-h-[150px] [&_.ck.ck-editor__main>.ck-editor__editable]:border [&_.ck.ck-editor__main>.ck-editor__editable]:border-gray-200 [&_.ck.ck-editor__main>.ck-editor__editable]:shadow-sm [&_.ck.ck-editor__main>.ck-editor__editable]:bg-white [&_.ck.ck-editor__main>.ck-editor__editable:focus]:border-blue-500 [&_.ck.ck-editor__main>.ck-editor__editable:focus]:ring-1 [&_.ck.ck-editor__main>.ck-editor__editable:focus]:ring-blue-500 [&_.ck.ck-toolbar]:border [&_.ck.ck-toolbar]:border-gray-200 [&_.ck.ck-toolbar]:border-b-0 [&_.ck.ck-toolbar]:rounded-t-lg [&_.ck.ck-toolbar]:bg-white [&_.ck.ck-toolbar]:p-2 [&_.ck.ck-editor__main>.ck-editor__editable]:rounded-b-lg [&_.ck.ck-editor__main>.ck-editor__editable]:p-4 [&_.ck.ck-toolbar__items]:flex-wrap [&_.ck.ck-toolbar>.ck-toolbar__items>*]:m-1 sm:[&_.ck.ck-editor__main>.ck-editor__editable]:p-4">
+        <div ref={editorRef}>
+          {ClassicEditor && editorConfig && (
+            <CKEditor
+
+              initialData={answer}
+              onAfterDestroy={() => {
+                Array.from(editorWordCountRef.current.children).forEach(
+                  (child) => child.remove()
+                );
+              }}
+              editor={ClassicEditor}
+              config={editorConfig}
+              onChange={(EventInfo, Editor) => {
+                // console.log("EventInfoName : ", EventInfo.name);
+                // console.log("Data : ", Editor.getData());
+                setAnswer(Editor.getData());
+              }}
+            />
+          )}
         </div>
-        {/* <div
-          className="editor_container__word-count"
-          ref={editorWordCountRef}
-        ></div> */}
       </div>
+      {/* <div
+        className="editor_container__word-count"
+        ref={editorWordCountRef}
+      ></div> */}
     </div>
   );
 }
