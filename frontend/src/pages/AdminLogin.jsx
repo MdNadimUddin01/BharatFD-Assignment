@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const AdminLogin = () => {
@@ -9,7 +9,7 @@ const AdminLogin = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -53,12 +53,12 @@ const AdminLogin = () => {
             Admin Login
           </h2>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
-              <label 
-                htmlFor="username" 
+              <label
+                htmlFor="username"
                 className="block text-sm font-medium text-gray-700"
               >
                 Username
@@ -78,10 +78,10 @@ const AdminLogin = () => {
                 placeholder="Enter your username"
               />
             </div>
-            
+
             <div>
-              <label 
-                htmlFor="password" 
+              <label
+                htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
                 Password
@@ -141,6 +141,13 @@ const AdminLogin = () => {
                 'Sign in'
               )}
             </button>
+
+            <p className="mt-2 text-center text-sm text-gray-600">
+              Or{' '}
+              <Link to="/admin-signup" className="font-medium text-indigo-600 hover:text-indigo-500">
+                sign up your account
+              </Link>
+            </p>
           </div>
         </form>
       </div>
