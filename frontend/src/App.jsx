@@ -40,6 +40,7 @@ function App() {
           <Route path="/admin-signup" element={<AdminSignup />} />
 
           <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+          {/* <Route path='' ></Route> */}
 
           <Route path="/admin/edit-faq/:id" element={<ProtectedRoute><EditFaq /></ProtectedRoute>} />
 

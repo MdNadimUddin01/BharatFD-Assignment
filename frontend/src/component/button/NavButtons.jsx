@@ -16,7 +16,7 @@ const NavButtons = () => {
         <>
           <button
             onClick={() => navigate('/admin')}
-            className="group relative inline-flex items-center gap-1.5 px-4 py-2 text-gray-700 rounded-md transition-colors duration-200 shadow-sm"
+            className="group cursor-pointer relative inline-flex items-center gap-1.5 px-4 py-2 text-gray-700 rounded-md transition-colors duration-200 shadow-sm"
           >
             <svg 
               className="w-5 h-5" 
@@ -41,7 +41,7 @@ const NavButtons = () => {
 
           <button
             onClick={handleLogout}
-            className="group relative inline-flex items-center gap-1.5 px-4 py-2 bg-white text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200 shadow-sm border border-gray-200"
+            className="group relative cursor-pointer inline-flex items-center gap-1.5 px-4 py-2 bg-white text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200 shadow-sm border border-gray-200"
           >
             <svg 
               className="w-5 h-5" 
@@ -67,7 +67,7 @@ const NavButtons = () => {
       ) : (
         <button
           onClick={() => navigate('/admin-login')}
-          className="group relative inline-flex items-center gap-1.5 px-4 py-2 bg-white text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200 shadow-sm border border-gray-200"
+          className="group relative cursor-pointer inline-flex items-center gap-1.5 px-4 py-2 bg-white text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200 shadow-sm border border-gray-200"
         >
           <svg 
             className="w-5 h-5" 

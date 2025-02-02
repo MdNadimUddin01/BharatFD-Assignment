@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
 
 const AdminLogin = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: 'admin@123.com',
+    password: 'Admin123',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,10 +29,9 @@ const AdminLogin = () => {
 
     try {
       // Replace this with your actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (formData.username === 'admin' && formData.password === 'admin123') {
-        // Simulate getting a token from your backend
+      if (formData.username === 'admin@123.com' && formData.password === 'Admin123') {
         const token = 'dummy_token';
         login(token);
         navigate('/');
@@ -124,7 +124,7 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent 
+              className="group cursor-pointer relative w-full flex justify-center py-2 px-4 border border-transparent 
                         text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 
                         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
                         disabled:bg-indigo-400 disabled:cursor-not-allowed transition-colors duration-200"
@@ -142,11 +142,8 @@ const AdminLogin = () => {
               )}
             </button>
 
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Or{' '}
-              <Link to="/admin-signup" className="font-medium text-indigo-600 hover:text-indigo-500">
-                sign up your account
-              </Link>
+            <p className="mt-2 text-center text-sm text-red-300">
+              Username and Password is already filled Click on Login button
             </p>
           </div>
         </form>

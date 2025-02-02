@@ -12,6 +12,7 @@ const EditFaq = ({ }) => {
     question: '',
     answer: ''
   });
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     fetchFaq();
@@ -19,7 +20,7 @@ const EditFaq = ({ }) => {
 
   const fetchFaq = async () => {
     try {
-      const response = await axios.get(`/api/faqs/${id}`);
+      const response = await axios.get(`${backendUrl}/api/faqs/${id}`);
       setFormData({
         question: response.data.question,
         answer: response.data.answer
@@ -34,7 +35,7 @@ const EditFaq = ({ }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/faqs/${id}`, formData);
+      await axios.put(`${backendUrl}/update-faq/${id}`, formData);
       navigate('/admin/my-faqs');
     } catch (err) {
       setError('Failed to update FAQ');
